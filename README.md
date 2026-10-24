@@ -89,17 +89,13 @@ The workflow uses a two-stage fitting strategy, first fitting an unconstrained s
 
 Produces graphics used to present the phylogenetic distribution of traits and fitted model results:
 
-- **Phylogenetic trait overview:** integrates vertebrate phylogenies, geological time information, taxonomic groupings, and life-history measurements; a section headed “Figure 2: Data overview” ultimately writes a PDF named `Figure1.pdf` in the code.
-- **PPA results:** summarizes model-averaged path relationships and displays estimated relationships and confidence intervals for the three taxonomic groups; writes `Figure3.pdf`.
-- **mvOU results:** compares model-fit summaries for alternative stochastic structures and illustrates selected interaction networks and directional-model outcomes; the code labels these panels as Figure 5a–c.
+- **Phylogenetic trait overview:** integrates vertebrate phylogenies, geological time information, taxonomic groupings, and life-history measurements; writes `Figure2`.
+- **PPA results:** summarizes model-averaged path relationships and displays estimated relationships and confidence intervals for the three taxonomic groups; writes `Figure4`.
+- **mvOU results:** compares model-fit summaries for alternative stochastic structures and illustrates selected coevolution networks and directional-model outcomes; writes  `Figure5 a-c`.
 
-**Inputs:** original trait data, phylogenies, PPA model results, mvOU fit summaries, and selected saved model-structure objects.
+## Intermediate model objects
 
-**Outputs:** figure objects and PDF graphics. **Figure numbering in code comments and output filenames is not fully consistent**; use the final manuscript's figure labels as authoritative.
-
-## Saved results and intermediate model objects
-
-Saved `.RData` files enable inspection of computationally intensive analyses without having to rerun all phylogenetic fits or optimization procedures. The following filenames are explicitly generated or referenced by the scripts; they are grouped here by purpose rather than claimed to be a complete inventory of the `result/` directory.
+Saved `.RData` files enable inspection of computationally intensive analyses without having to rerun all phylogenetic fits or optimization procedures. 
 
 | Files | Contents | Associated analysis |
 | --- | --- | --- |
@@ -113,44 +109,7 @@ Saved `.RData` files enable inspection of computationally intensive analyses wit
 | `result_constrained_Model_10_reptile_OU_niter100.RData` | Direction-constrained mvOU fits for the selected reptilian candidate structure. | Directional coevolution in reptiles |
 | `Model6_models.RData`, `Model3_models.RData`, `Model10_models.RData` | Candidate structural matrices loaded for network displays in the figure-generation script. | Visualization of candidate coupling structures |
 
-**Interpretation:** `PGLS`, `pPCA`, and `PPA` outputs represent comparative results and fitted path models; `SyyDiagonal`/`SyyUpperTri` files store mvOU model-selection results; `result_constrained_*` files store fitted directional candidate models. These are **intermediate computational results**, not raw observations. The main visualization script can use them to regenerate downstream summaries without repeating each intensive optimization.
-
-## Analysis workflow and reproducibility
-
-The intended dependency order is:
-
-```text
-Original trait data + phylogenetic trees
-                 |
-                 v
- LifeHis_PGLS_pPCA_PPA.R
-   |-- body-size-corrected data
-   |-- evolutionary model comparisons / PGLS
-   |-- pPCA outputs
-   `-- PPA candidate-model results
-                 |
-                 v
-        LifeHis_mvOU.R
-   |-- constrained adaptation-matrix models
-   |-- AICc-based structural selection
-   `-- directional fits / half-life summaries
-                 |
-                 v
-    LifeHis_visualization.R
-   `-- phylogenetic displays, path diagrams,
-       model comparisons, and figure PDFs
-```
-
-To explore or rerun analyses:
-
-```bash
-git clone https://github.com/haochh/Lifehistory_coevolution.git
-cd Lifehistory_coevolution
-```
-
-Open the `.R` files in R/RStudio and run sections in the order above after checking that their required data and model files are available in the **current R working directory**. The scripts contain top-level executable blocks and `load()`, `read.csv()`, `read.tree()`, `save()`, and `pdf()` calls with filename-relative paths. They are **not currently packaged as a one-command, end-to-end pipeline**. In particular, replace any author-specific absolute output paths in the visualization script with paths valid on your system.
-
-The mvOU optimizations may require considerable computational time. If the necessary `.RData` outputs are already present, load them to reproduce comparisons and visualizations rather than refitting all candidate models.
+**Interpretation:** `PGLS`, `pPCA`, and `PPA` outputs represent comparative results and fitted path models; `SyyDiagonal`/`SyyUpperTri` files store mvOU model-selection results; `result_constrained_*` files store fitted directional candidate models. These are **intermediate computational results**. The main visualization script can use them to regenerate downstream summaries without repeating each intensive optimization.
 
 ## Software
 
@@ -159,13 +118,3 @@ The analyses were written in **R**. Packages called directly in the three script
 - **Phylogenetics and comparative analyses:** `ape`, `phytools`, `phylolm`, `phylopath`, `mvSLOUCH`, `PCMBaseCpp`.
 - **Data handling, model processing, and parallel computation:** `dplyr`, `purrr`, `tidyverse`, `FactoMineR`, `foreach`, `doParallel`, `igraph`.
 - **Graphics and figure assembly:** `ggplot2`, `ggtree`, `treeio`, `ggtreeExtra`, `paletteer`, `rphylopic`, `ggimage`, `ggnewscale`, `deeptime`, `ggpubr`, `patchwork`.
-
-The repository does not establish a single, independently validated R/package version set here. For strict reproducibility, record the R version and package versions used for the published analyses (for example with `sessionInfo()` or a dependency lockfile).
-
-## Citation and data provenance
-
-Please cite the associated manuscript when using these data, scripts, or analytical results. Full bibliographic details and the original sources of the trait datasets and phylogenies should be obtained from the manuscript. No author list, DOI, journal, license, or data-source citation is supplied here without verification.
-
-## Notes on documentation scope
-
-This README was prepared from the public repository's root listing and the source code of its three R scripts. While the existence of the `Data/` and `result/` directories is confirmed, the **complete contents of those folders could not be enumerated reliably** during review. Consequently, tables above document exact **filenames referenced in code**, not a claim that every listed output is currently committed at the displayed location. Before publication, compare this file against the current directory listings and the final manuscript to confirm file presence, source citations, and figure numbering.
