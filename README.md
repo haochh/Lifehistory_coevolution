@@ -16,8 +16,6 @@ Lifehistory_coevolution/
 └── LifeHis_visualization.R      # Figures for trait data and fitted models
 ```
 
-`Data/` and `result/` are the directory names in the GitHub repository (note the lowercase `result`). The following file descriptions are based on the input/output names explicitly referenced in the R scripts. Some of these files may need to be copied from their repository subdirectories into the working directory, or the script paths adjusted; the scripts generally refer to files by **basename** rather than `Data/` or `result/` paths.
-
 ## Data
 
 The analyses consider three vertebrate groups independently: **mammals, birds, and reptiles**. For each group, the starting data comprise species-level life-history measurements and an associated phylogenetic tree. The main comparative analyses use five life-history traits corrected for body size using phylogenetic regression.
