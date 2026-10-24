@@ -79,7 +79,7 @@ Uses multivariate OU modeling (`mvSLOUCH`) to investigate the evolutionary coupl
 5. Enumerates alternative directions for interactions in the selected structure, constrains parameter signs using the best PPA model, and fits directional mvOU candidates using **100 optimization iterations**.
 6. Extracts the selected model's adaptation matrix and eigen-decomposition/phylogenetic half-life summaries, providing information about directional coupling and longer-term evolutionary dynamics.
 
-The workflow uses a two-stage fitting strategy, first fitting an unconstrained starting model and then fitting models with specified adaptation-matrix restrictions. The code sets random seeds for repeated optimization and uses five parallel workers in the relevant fitting blocks.
+The workflow uses a two-stage fitting strategy, first fitting an unconstrained starting model and then fitting models with specified adaptation-matrix restrictions. 
 
 **Inputs:** corrected data CSVs, tree files, and group-specific `*_PPA_results.RData` files.
 
