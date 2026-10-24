@@ -13,7 +13,7 @@ Lifehistory_coevolution/
 ├── result/                       # Saved analytical outputs; see Results section
 ├── LifeHis_PGLS_pPCA_PPA.R       # Data processing, PGLS, pPCA, and PPA
 ├── LifeHis_mvOU.R                # Multivariate OU models and directional coupling
-└── LifeHis_visualization.R      # Figures from trait data and fitted models
+└── LifeHis_visualization.R      # Figures for trait data and fitted models
 ```
 
 `Data/` and `result/` are the directory names in the GitHub repository (note the lowercase `result`). The following file descriptions are based on the input/output names explicitly referenced in the R scripts. Some of these files may need to be copied from their repository subdirectories into the working directory, or the script paths adjusted; the scripts generally refer to files by **basename** rather than `Data/` or `result/` paths.
